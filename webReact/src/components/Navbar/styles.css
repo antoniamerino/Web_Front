@@ -1,9 +1,10 @@
 * {
     box-sizing: border-box;
-    position: fixed and top: 0;
+    position: fixed and absolute;
 }
 
 body {
+    position: absolute;
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
