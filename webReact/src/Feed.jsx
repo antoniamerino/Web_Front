@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function UserWelcome() {
+export default function Feed() {
 
     const [name, setName] = useState(null)
 

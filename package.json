@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/IIC2513/grupo_Chatgepeteros_frontend.git",
   "author": "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 <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>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react-router-dom": "^6.15.0"
+  }
 }
