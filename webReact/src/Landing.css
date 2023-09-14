@@ -1,0 +1,40 @@
+/* Ordena la pagina con formato inspirado en Facebook, que tiene logo a la izq y el login a la derecha */
+.formato-landing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  .logo {
+    max-width: 100px;
+  }
+  
+  .caja-inicio-sesion {
+    /* le da sombras a lo facebook*/
+    border: 1px; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    width: 250px; 
+    text-align: center; 
+  }
+  
+/* esto es para que email y contraseña esten arribita del input*/
+  label {
+    display: block;
+  }
+
+  button[type="submit"] {
+    background-color: #bda17e; 
+    color: #fff;
+    border: none; 
+    cursor: pointer; 
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #404304;
+  }
+
+  strong {
+    font-weight: bold;
+  }
