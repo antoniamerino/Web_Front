@@ -17,8 +17,12 @@ function Landing() {
                 <label htmlFor="password">Contraseña</label>
                 <input type="password" id="password" name="password" />
                 <button type="submit">Iniciar sesión</button>
+                
+                
             </form>
             <p>¿Aún no tienes cuenta?</p>
+            <a href='/feed'> Pagina Principal </a>
+            <a href='/instructions'> Instrucciones</a>
             <button>Registrarse</button>
         </div>
         </>
