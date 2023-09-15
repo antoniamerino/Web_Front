@@ -1,20 +1,16 @@
-import { useState } from 'react';
+import './Feed.css'
+import Post from "./Post"
 
 export default function Feed() {
 
-    const [name, setName] = useState(null)
-
-    function handleChange( name ) {
-        setName(name)
-    }
-
     return (
-            <>
-            <h2>Mi primer componente</h2>
-            <input
-                onChange={(e) => handleChange(e.target.value)}
-            />
-            <p>Hola {name}</p>
-            </>
+            <div className='feed'>
+                <div className='feed-row'>
+                    <Post/>
+                </div>
+                <div className='feed-row'>
+                    <Post/>
+                </div>
+            </div>
     )
 }
