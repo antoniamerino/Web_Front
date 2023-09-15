@@ -21,7 +21,7 @@
   .user-name {
     font-size: 1.5rem;
     margin: 0;
-    color: #007bff; /* Color similar al utilizado en el feed */
+    color: #007bff; 
   }
   
   .user-bio {
@@ -37,10 +37,10 @@
   
   .stat {
     font-size: 1rem;
-    color: #777; /* Color similar al utilizado en el feed */
+    color: #777; 
   }
   
   .stat strong {
     font-weight: bold;
-    color: #555; /* Color similar al utilizado en el feed */
+    color: #555; 
   }
