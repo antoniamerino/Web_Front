@@ -1,0 +1,31 @@
+  
+  h4 {
+    background-color: #1335bf; 
+    text-align: left;
+    color: white;
+    text-align: center;
+  }
+  
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+  }
+  
+  ul {
+    margin-left: 20px;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  strong {
+    font-weight: bold;
+  }
+  
+  crazy {
+    font-weight: bold;
+    color: black;
+    background-color: rgb(255, 255, 255); 
+    font-family: 'Courier New', Courier, monospace;
+    
+  }
