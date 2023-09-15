@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: #1976d2;
+    background-color: #1335bf;
     color: #fff;
     align-items: stretch;
     gap: 2rem;
@@ -47,7 +47,7 @@ body {
 }
 
 .nav li.active {
-    background-color: #0d47a1;
+    background-color: #043f97;
 }
 
 .nav li:hover {

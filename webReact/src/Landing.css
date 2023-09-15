@@ -3,14 +3,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #f8c910;
 }
-
-  .logo {
-    max-width: 100px;
-  }
-  
+ 
   .caja-inicio-sesion {
     /* le da sombras a lo facebook*/
+    background-color: #fcfbfa;
     border: 1px; 
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
@@ -24,17 +22,24 @@
   }
 
   button[type="submit"] {
-    background-color: #bda17e; 
+    background-color: #1335bf; 
     color: #fff;
     border: none; 
     cursor: pointer; 
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
   }
   
   button[type="submit"]:hover {
-    background-color: #404304;
+    background-color: #74ade7;
   }
 
   strong {
     font-weight: bold;
+    text-align: center;
+  }
+
+  h3 {
+    margin-top: 1px;
+    margin-bottom: 1px;
   }

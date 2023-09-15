@@ -8,13 +8,11 @@ function Landing() {
         <>
         <div className="formato-landing">
         <div>
-
           <img src={logo} alt="Logo" style={{width: "300px"}}/>
-          <p>
-            <strong>Tu página de intercambio de servicios</strong>
-          </p>
+          <h3>Intercambio de Servicios</h3>
+          
         </div>
-
+        
 {/* CAJA DE INICIO DE SESION */} 
         <div className="caja-inicio-sesion">
           <h2>Iniciar Sesión</h2>
@@ -27,12 +25,11 @@ function Landing() {
 
             <button type="submit">Iniciar Sesión</button>
           </form>
-              <p>¿Aún no tienes cuenta?</p>
+              <label>¿Aún no tienes cuenta?</label>
               <button type="submit">Registrarse</button>
         </div>
 
       </div>
-      <a href='/feed'>Acceder sin Iniciar Sesión</a>
       </>
     );
 }
