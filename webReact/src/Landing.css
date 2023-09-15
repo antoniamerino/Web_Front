@@ -22,7 +22,7 @@
   }
 
   button[type="submit"] {
-    background-color: #1335bf; 
+    background-color: #007BFF; 
     color: #fff;
     border: none; 
     cursor: pointer; 
@@ -31,7 +31,7 @@
   }
   
   button[type="submit"]:hover {
-    background-color: #74ade7;
+    background-color: #1335bf;
   }
 
   strong {

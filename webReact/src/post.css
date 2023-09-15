@@ -1,0 +1,50 @@
+.post{
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: #1335bf;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    max-width: 220px;
+}
+
+.post-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+}
+
+.post-name {
+    font-weight: bold;
+    color: white; 
+    text-align: center;
+    font-size: 1em; 
+  }
+
+.post img{
+    height: 150px;
+    padding: 0.1em;
+    margin-bottom: 10px;
+}
+
+.button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+
+.button:hover {
+    background-color: #0056b3;
+}

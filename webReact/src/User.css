@@ -1,5 +1,46 @@
-.user {
+.user-profile {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .user-img {
+    height: 150px;
+    padding: 0.1em;
+    margin-bottom: 10px;
+  }
+  
+  .user-name {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #007bff; /* Color similar al utilizado en el feed */
+  }
+  
+  .user-bio {
+    color: #555;
+    margin-top: 8px;
+  }
+  
+  .user-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
+  }
+  
+  .stat {
+    font-size: 1rem;
+    color: #777; /* Color similar al utilizado en el feed */
+  }
+  
+  .stat strong {
+    font-weight: bold;
+    color: #555; /* Color similar al utilizado en el feed */
+  }

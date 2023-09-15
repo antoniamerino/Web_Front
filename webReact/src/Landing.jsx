@@ -9,8 +9,8 @@ function Landing() {
         <div className="formato-landing">
         <div>
           <img src={logo} alt="Logo" style={{width: "300px"}}/>
-          <h3>Intercambio de Servicios</h3>
-          
+          <h3> Conéctate para ganar y ayudar: </h3>
+          <h3>  Encuentra y ofrece servicios rápidos y sencillos </h3>
         </div>
         
 {/* CAJA DE INICIO DE SESION */} 
