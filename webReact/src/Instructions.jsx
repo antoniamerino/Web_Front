@@ -5,28 +5,25 @@ import './Instructions.css'
 import React, { useState, useEffect } from 'react';
 
 export default function DisplayInstructions() {
-  const textos = [
-    "Landing Page y Registro",
-    "Navegación", "Feed","Componente Social","Confianza y Reseñas","Monedero",
-  ];
-  
+//   const textos = [
+//     "Landing Page y Registro",
+//     "Navegación", "Feed","Componente Social","Confianza y Reseñas","Monedero",
+//   ];
 
-  const [indiceTexto, setIndiceTexto] = useState(0);
-  const [textosVisibles, setTextosVisibles] = useState([]);
+//   const [indiceTexto, setIndiceTexto] = useState(0);
+//   const [textosVisibles, setTextosVisibles] = useState([]);
 
   // efecto obtenido de internet
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (indiceTexto < textos.length) {
-        setTextosVisibles((prevTextos) => [...prevTextos, textos[indiceTexto]]);
-        setIndiceTexto(indiceTexto + 1);
-      }
-    }, 2000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     if (indiceTexto < textos.length) {
+  //       setTextosVisibles((prevTextos) => [...prevTextos, textos[indiceTexto]]);
+  //       setIndiceTexto(indiceTexto + 1);
+  //     }
+  //   }, 2000);
 
-    return () => clearInterval(intervalId);
-  }, [indiceTexto, textos]);
-
-
+  //   return () => clearInterval(intervalId);
+  // }, [indiceTexto, textos]);
 
 
   return (
@@ -47,13 +44,13 @@ export default function DisplayInstructions() {
             La idea principal es fomentar la conexion entre las personas que buscan un
             servicio y aquellas dispuestas a realizarlos.</p>
 
-            <h2>
+            {/* <h2>
         <strong>A continuación te hablaremos de las instrucciónes y detalles sobre los siguientes temas desplegados dinámicamente:</strong>
-        </h2>
-
+        </h2> */}
+{/* 
       {textosVisibles.map((texto, index) => (
         <p key={index}><h3><ol><crazy>{texto}</crazy></ol></h3></p>
-      ))}
+      ))} */}
 
 
         <h4><strong>Landing Page y Registro </strong></h4>

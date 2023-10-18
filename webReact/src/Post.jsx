@@ -6,6 +6,11 @@ export default function Post({imgSrc, postName}){
     
     const handleLikeClick = () => {
         setLikes(likes + 1);
+        if (likes >= 1 ){
+            setLikes(0);
+        } else {
+            setLikes(1);
+        }
       };
     return(
         <div className='post'>
@@ -18,7 +23,7 @@ export default function Post({imgSrc, postName}){
                 <button className='button' onClick={handleLikeClick}>
                   Me gusta
                 </button>
-                <p>{likes} Me gusta</p>
+                <p><div className="kolor">{likes} Like </div></p>
             </div>
         </div>
     )

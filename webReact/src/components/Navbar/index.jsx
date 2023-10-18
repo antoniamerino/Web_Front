@@ -4,8 +4,8 @@ import "./styles.css"
 
 function Navbar() {
   return (
-	<nav className="nav">
-		<a href="/" className="site-title">FavoRapido</a>
+	<nav className="navbar">
+		<a href="/" className="site-title">WINK ;)</a>
 		<ul className="nav__links">
 			<li><a href="/">Home</a></li>
 			<li><a href="/feed">Feed</a></li>

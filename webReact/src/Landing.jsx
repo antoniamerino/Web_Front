@@ -1,37 +1,36 @@
-import './Landing.css'
-import logo from './assets/logo.png';
+import React from 'react';
+import './landing.css';
+import logo from "./assets/whitelogowink.jpeg";
 
-// DISEÑO INSPIRADO EN LOGIN DE FACEBOOK
+function App() {
+  return (
+    <div className="container">
+      <img src={logo} className='logo' alt='Logo' />
 
-function Landing() {
-    return (
-        <>
-        <div className="formato-landing">
-        <div>
-          <img src={logo} alt="Logo" style={{width: "300px"}}/>
-          <h3> Conéctate para ganar y ayudar: </h3>
-          <h3>  Encuentra y ofrece servicios rápidos y sencillos </h3>
-        </div>
-        
-{/* CAJA DE INICIO DE SESION */} 
-        <div className="caja-inicio-sesion">
-          <h2>Iniciar Sesión</h2>
-          <form>
+      <div className="login-form">
+        <h2>Iniciar Sesión</h2>
+        <form>
+          <input
+            type="text"
+            placeholder="Usuario"
+            className="input-field"
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            className="input-field"
+          />
+          <button type="submit" className="login-button">
+            Iniciar Sesión
+          </button>
+          <p className="login-lost">
+            ¿No tienes cuenta? <a href="#">Regístrate aquí</a>
+          </p>
 
-              <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" />
-              <label htmlFor="password">Contraseña:</label>
-              <input type="password" id="password" name="password" />
-
-            <button type="submit">Iniciar Sesión</button>
-          </form>
-              <label>¿Aún no tienes cuenta?</label>
-              <button type="submit">Registrarse</button>
-        </div>
-
+        </form>
       </div>
-      </>
-    );
+    </div>
+  );
 }
 
-export default Landing;
+export default App;
