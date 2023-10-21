@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "koa": "^2.14.2",
+    "koa-router": "^11.0.2",
+    "nodemon": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
@@ -24,5 +27,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "vite": "^4.4.5"
-  }
+  },
+  "main": "index.js",
+  "license": "MIT"
 }
