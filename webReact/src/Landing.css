@@ -1,45 +1,51 @@
-/* Ordena la pagina con formato inspirado en Facebook, que tiene logo a la izq y el login a la derecha */
-.formato-landing {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8c910;
+/* Reset de estilos para quitar márgenes y rellenos predeterminados */
+
+/* Establecer altura al 100% para el elemento HTML y body */
+
+/* Estilos para el contenedor principal de la página */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 }
- 
-  .caja-inicio-sesion {
-    /* le da sombras a lo facebook*/
-    background-color: #fcfbfa;
-    border: 1px; 
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    width: 250px; 
-    text-align: center; 
-  }
-  
-/* esto es para que email y contraseña esten arribita del input*/
-  label {
-    display: block;
-  }
 
-  button[type="submit"] {
-    background-color: #007BFF; 
-    color: #fff;
-    border: none; 
-    cursor: pointer; 
-    margin-top: 15px;
-    margin-bottom: 10px;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #1335bf;
-  }
+/* Estilos para el logotipo */
+.logo {
+  font-size: 3rem; /* Reducir el tamaño del logotipo */
+  font-weight: bold;
+  margin-bottom: 0px; /* Reducir el margen inferior */
+  margin-top: 0px; /* Agregar margen superior para moverlo hacia arriba */
+}
 
-  strong {
-    font-weight: bold;
-    text-align: center;
-  }
+/* Estilos para el formulario de inicio de sesión */
+.login-form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
 
-  h3 {
-    margin-top: 1px;
-    margin-bottom: 1px;
-  }
+/* Estilos para los campos de entrada y el botón de inicio de sesión */
+.input-field {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #203acd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #07095e;
+}

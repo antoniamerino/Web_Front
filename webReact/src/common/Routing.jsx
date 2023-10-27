@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Landing from './../Landing.jsx';
+import Landing from '../Landing.jsx';
 import Feed from '../Feed';
 import App from './App';
 import Instructions from '../Instructions';
