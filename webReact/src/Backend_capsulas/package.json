@@ -1,17 +1,21 @@
 {
-  "name": "webreact",
+  "name": "backend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+
   "scripts": {
-    "dev": "vite",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.6.0",
     "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "koa-logger": "^3.2.1",
     "koa-router": "^11.0.2",
     "nodemon": "^3.0.1",
     "react": "^18.2.0",
