@@ -10,6 +10,8 @@
 
 ## Código :symbols:
 
+Ojo: yarn dev debe ser hecho dentro de la carpeta webReact.<br>
+
 En este codigo se crea la estructura principal básica de nuestra pagina web.
 Para esto se usaron varios componentes como: Landing, Instructions, Feed, Post, User, etc. Para mostrar la navegacion entre las vistas principales mediante una navbar.
 Las paginas principales son:
