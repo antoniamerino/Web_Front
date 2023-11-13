@@ -5,10 +5,18 @@
     padding: 10px;
     display: flex; 
     justify-content: space-between; 
-    height: 50px; 
+    height: 30px; 
     align-items: center;
+    position: absolute; 
     width: 100%;
+    top: 0;
+  }
 
+  @media (min-width: 1200px) {
+    .navbar {
+    width: 100%;
+    left: 0%; 
+    }
   }
   
   .site-title {

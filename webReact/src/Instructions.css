@@ -3,7 +3,7 @@
     background-color: #1335bf; 
     text-align: left;
     color: white;
-    text-align: center;
+    text-align: left;
   }
   
   p {
@@ -20,12 +20,4 @@
   
   strong {
     font-weight: bold;
-  }
-  
-  crazy {
-    font-weight: bold;
-    color: black;
-    background-color: rgb(255, 255, 255); 
-    font-family: 'Courier New', Courier, monospace;
-    
   }

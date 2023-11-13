@@ -2,7 +2,7 @@ import React from 'react';
 import './landing.css';
 import logo from "./assets/whitelogowink.jpeg";
 
-function App() {
+export default function Landing() {
   return (
     <div className="container">
       <img src={logo} className='logo' alt='Logo' />
@@ -32,5 +32,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
