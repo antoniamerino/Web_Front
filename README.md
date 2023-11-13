@@ -1,4 +1,4 @@
-# Entrega 1 :construction:
+# Entrega 3 :construction:
 
 * :pencil2: **Grupo:** grupo_Chatgepeteros_frontend
 
@@ -11,6 +11,7 @@
 ## Código :symbols:
 
 Ojo: se debe hacer yarn y luego yarn dev dentro de la carpeta webReact.<br>
+Es necesario también instalar la librería de axios con: yarn add axios antes de comenzar con el uso del frontend, esta librería nos permite hacer uso de las requests de HTTP y entablar enlace con el backend y la BDD.
 
 En este codigo se crea la estructura principal básica de nuestra pagina web.
 Para esto se usaron varios componentes como: Landing, Instructions, Feed, Post, User, etc. Para mostrar la navegacion entre las vistas principales mediante una navbar.
