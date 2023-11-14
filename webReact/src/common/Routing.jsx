@@ -5,6 +5,7 @@ import Feed from '../Feed';
 import App from './App';
 import Instructions from '../Instructions';
 import User from '../User';
+import Login from '../Login.jsx';
 
 function Routing() {
     return (
@@ -16,6 +17,7 @@ function Routing() {
                 <Route path={"/app"} element={<App />} />
                 <Route path={"/instructions"} element={<Instructions />} />
                 <Route path= {"/user"} element={<User />} />
+                <Route path= {"/login"} element={<Login />} />
             </Routes>
         </BrowserRouter>
         </>
