@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import './landing.css';
+import './Landing.css';
 import logo from "./assets/whitelogowink.jpeg";
 
 export default function Landing() {
