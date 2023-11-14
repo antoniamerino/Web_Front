@@ -5,6 +5,10 @@ import Feed from '../Feed';
 import App from './App';
 import Instructions from '../Instructions';
 import User from '../User';
+import Create_Post from '../CRUDs/Create_Post';
+import Delete_Post from '../CRUDs/Delete_Post';
+import Create_Comentario from '../CRUDs/Create_Comentario';
+import Chat from '../CRUDs/Chat';
 
 function Routing() {
     return (
@@ -16,6 +20,10 @@ function Routing() {
                 <Route path={"/app"} element={<App />} />
                 <Route path={"/instructions"} element={<Instructions />} />
                 <Route path= {"/user"} element={<User />} />
+                <Route path= {"/feed/create_post"} element={<Create_Post />} />
+                <Route path= {"/feed/delete_post"} element={<Delete_Post />} />
+                <Route path= {"/feed/create_comentario/:postId"} element={<Create_Comentario />} />
+                <Route path= {"/feed/chat/:userId"} element={<Chat />} />
             </Routes>
         </BrowserRouter>
         </>
