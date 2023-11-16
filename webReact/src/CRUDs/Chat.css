@@ -1,0 +1,38 @@
+
+
+/*Obtenido de ChatGPT*/
+
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .chat-messages {
+    margin-top: 20px;
+  }
+  
+  .message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  
+  .message.sent {
+    background-color: #3498db;
+    color: #fff;
+    align-self: flex-end;
+  }
+  
+  .message.received {
+    background-color: #ecf0f1;
+    color: #333;
+    align-self: flex-start;
+  }
+  
+  span {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+  }
+  
