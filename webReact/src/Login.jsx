@@ -3,9 +3,12 @@ import React, {useState} from "react";
 import './Login.css';
 import logo from "./assets/whitelogowink.jpeg";
 import axios from "axios";
+import { AuthContext } from "./auth/AuthContext";
+import { useContext } from "react";
 
 //Componente
 function Login() {
+    const { token, setToken } = useContext(AuthContext);
     //Dos estados
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,6 +18,19 @@ function Login() {
 
         console.log("apretaste el form")
         // vamos a enviar un post
+        axios.post("http://localhost:3000/login",
+        {
+            email: email,
+            password: password
+        }).then((response) => {
+          // uno entra acá si no hay error en el request
+          const access_token = response.data.access_token;
+          setToken(access_token);
+
+          console.log(response);
+        }).catch((error) => {
+          console.log(error);
+        })
     };
 
   return (

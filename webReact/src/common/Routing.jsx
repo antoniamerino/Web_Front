@@ -6,6 +6,8 @@ import App from './App';
 import Instructions from '../Instructions';
 import User from '../User';
 import Login from '../Login.jsx';
+import UserCheck from '../protected/UserCheck.jsx';
+import AdminCheck from '../protected/AdminCheck.jsx';
 
 function Routing() {
     return (
@@ -18,6 +20,8 @@ function Routing() {
                 <Route path={"/instructions"} element={<Instructions />} />
                 <Route path= {"/user"} element={<User />} />
                 <Route path= {"/login"} element={<Login />} />
+                <Route path= {"/protecteduser"} element={<UserCheck />} />
+                <Route path= {"/protectedadmin"} element={<AdminCheck />} />
             </Routes>
         </BrowserRouter>
         </>
