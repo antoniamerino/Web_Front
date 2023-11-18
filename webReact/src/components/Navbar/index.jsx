@@ -1,17 +1,22 @@
 import "./styles.css"
 import LogoutButton from "../../Logout";
-import UserCheck from "../../protected/UserCheck";
+import AuthCheck from "../../auth/AuthCheck";
 
 // ref https://www.youtube.com/watch?v=SLfhMt5OUPI
 
 function Navbar() {
 
-//   const { user } = UserCheck();
-//   var logButton = <a href="/login">Login</a>;
-//   if (user != null) {
-// 	//   show logout button with html
-// 	logButton = <LogoutButton />
-//   };
+  function displayLoginOrLogout() {
+	if (AuthCheck()) {
+	  return (
+		<li><LogoutButton /></li>
+	  );
+	} else {
+	  return (
+		<li><a href="/login">Login</a></li>
+	  );
+	}
+  }
 
   return (
 	<nav className="navbar">
@@ -21,8 +26,7 @@ function Navbar() {
 			<li><a href="/feed">Feed</a></li>
 			<li><a href="/instructions">About</a></li>
 			<li><a href="/user">User</a></li>
-			{/* {logButton} */}
-			<li><a href="/login">Login</a></li>
+			{displayLoginOrLogout()}
 		</ul>
 	</nav>
   )

@@ -6,10 +6,11 @@ function AuthProvider({ children }) {
 
     useEffect(() => {
         localStorage.setItem("token", token);
-    }, [token])
+    }, [token]);
 
     function logout(token) {
         setToken(null);
+        localStorage.setItem("userData", null);
     }
 
     return (

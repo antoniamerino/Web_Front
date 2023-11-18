@@ -5,6 +5,7 @@ import logo from "./assets/whitelogowink.jpeg";
 import axios from "axios";
 import { AuthContext } from "./auth/AuthContext";
 import { useContext } from "react";
+import { json } from "react-router-dom";
 
 //Componente
 function Login() {
@@ -12,6 +13,19 @@ function Login() {
     //Dos estados
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    async function getUserData(email) {
+        axios.get(`http://localhost:3000/users/email/${email}`, {
+        }).then((response) => {
+            localStorage.setItem("userData", JSON.stringify(response.data));
+            const userData = JSON.parse(localStorage.getItem("userData"));
+            console.log(userData);
+            return response.data;
+        }).catch((error) => {
+            console.log(error);
+            return null;
+        })
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,6 +40,8 @@ function Login() {
           // uno entra acá si no hay error en el request
           const access_token = response.data.access_token;
           setToken(access_token);
+          getUserData(email);
+          // location.href = "/";
 
           console.log(response);
         }).catch((error) => {

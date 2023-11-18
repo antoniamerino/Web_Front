@@ -9,6 +9,9 @@ const LogoutButton = () => {
     function handleLogout() {
         logout();
         setMsg("has cerrado sesion con éxito");
+        // send to "/"
+        location.href = "/";
+
     }
 
     return (
