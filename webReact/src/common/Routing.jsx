@@ -36,7 +36,6 @@ function Routing() {
                 <Route path= {"/feed/create_comentario/:postId"} element={<Create_Comentario />} />
                 <Route path= {"/feed/chat/:userId"} element={<Chat />} />
                 <Route path= {"/feed/reviews/:userId"} element={<Review />} />
-
             </Routes>
         </BrowserRouter>
         </>

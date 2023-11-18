@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Chat.css';
+import { AuthContext } from '../auth/AuthContext';
 
 function Chat() {
   const { userId } = useParams();
@@ -10,18 +11,22 @@ function Chat() {
   const [mensajes, setMensajes] = useState([]);
   const [newMensaje, setNewMensaje] = useState('');
   const [msg, setMsg] = useState('');
+  const { token } = useContext(AuthContext);
+  const headers = {
+    'Authorization': `Bearer ${token}`
+  }
 
   useEffect(() => {
     const fetchChatData = async () => {
       try {
-        const chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${myUserId}/user2/${userId}`);
+        const chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${myUserId}/user2/${userId}`, { headers });
         const chat = chatRespuesta.data[0];
         setChatData(chat);
 
     // LO CREAMOS SI NO EXISTE
         if (!chat) {
             try {
-                const newChatRespuesta = await axios.post('http://localhost:3000/chats', { id_user_1: myUserId, id_user_2: userId });
+                const newChatRespuesta = await axios.post('http://localhost:3000/chats', { id_user_1: myUserId, id_user_2: userId }, { headers });
                 const newChat = newChatRespuesta.data;
                 console.log('Respuesta del servidor al crear el chat:', newChat);
               
@@ -36,7 +41,7 @@ function Chat() {
         } else {
     // SI YA EXISTE LO CARGAMOS
     try{
-        const mensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chat.id}`);
+        const mensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chat.id}`, { headers });
         const chatMensajes = mensajesRespuesta.data;
         setMensajes(chatMensajes);
     }
@@ -61,9 +66,9 @@ function Chat() {
 
     try {
         // posteamos
-      await axios.post('http://localhost:3000/mensajes', { id_chat: chatData.id, id_user_sender: myUserId, contenido: newMensaje });
+      await axios.post('http://localhost:3000/mensajes', { id_chat: chatData.id, id_user_sender: myUserId, contenido: newMensaje }, { headers });
       // de nuevo recogemos el get
-      const updatedMensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chatData.id}`);
+      const updatedMensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chatData.id}`, { headers });
       const updatedMensajes = updatedMensajesRespuesta.data;
 
       // redefinimo

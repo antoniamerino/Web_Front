@@ -2,13 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../auth/AuthContext";
 
-function UserCheck() {
+function UserCheck(route) {
     const { token } = useContext(AuthContext);
     const [msg, setMsg] = useState("");
 
     const config = {
         'method': 'get',
-        'url': 'http://localhost:3000/scope-example/protecteduser',
+        'url': `http://localhost:3000/${route}`,
         'headers': {
             'Authorization': `Bearer ${token}`
         }

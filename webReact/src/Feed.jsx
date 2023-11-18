@@ -6,7 +6,8 @@ import limpieza from './assets/limpieza.jpg';
 import payaso from './assets/payaso.jpg';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useContext } from 'react';
+import { AuthContext } from './auth/AuthContext';
 
 function Feed() {
     // const posts = [
@@ -17,9 +18,13 @@ function Feed() {
     // ]
 
     const [posts, setPosts] = useState([]);
+    const { token } = useContext(AuthContext);
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
 
     useEffect(() => {
-      axios.get('http://localhost:3000/posts')
+      axios.get('http://localhost:3000/posts', { headers })
         .then((response) => {
           setPosts(response.data);
         })

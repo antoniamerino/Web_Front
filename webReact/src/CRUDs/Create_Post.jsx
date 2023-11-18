@@ -1,8 +1,9 @@
 // Create_Post.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Post.css';
 import axios from 'axios';
+import { AuthContext } from '../auth/AuthContext';
 
 function Create_Post() {
 
@@ -17,6 +18,10 @@ function Create_Post() {
   
   const [msg, setMsg] = useState("");
   const [complete, setComplete] = useState(false);
+    const { token } = useContext(AuthContext);
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
 
   const handleCreatePost = async (event) => {
     event.preventDefault();
@@ -35,7 +40,7 @@ function Create_Post() {
                     updatedAt: inputUpdatedAt
                   }
 
-                    await axios.post('http://localhost:3000/posts', nuevo_post);
+                    await axios.post('http://localhost:3000/posts', nuevo_post, { headers });
                     setMsg("Posteado bien");
                     setComplete(true);
             }
