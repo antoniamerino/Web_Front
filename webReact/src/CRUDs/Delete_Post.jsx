@@ -1,8 +1,9 @@
 // Create_Post.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Post.css';
 import axios from 'axios';
+import { AuthContext } from '../auth/AuthContext';
 
 function Delete_Post() {
 
@@ -18,6 +19,10 @@ function Delete_Post() {
   
   const [msg, setMsg] = useState("");
   const [complete, setComplete] = useState(false);
+  const { token } = useContext(AuthContext);
+  const headers = {
+    'Authorization': `Bearer ${token}`
+  }
 
   const handleClickGet = async (event) => {
     if (inputId === "") {
@@ -26,7 +31,7 @@ function Delete_Post() {
     }
 
     try {
-        const response = await axios.get('http://localhost:3000/posts/'+inputId); 
+        const response = await axios.get('http://localhost:3000/posts/'+inputId, { headers }); 
         setInputIdUser(response.data.id_user);
         setInputTitulo(response.data.titulo);
         setInputFoto(response.data.foto);
@@ -50,13 +55,13 @@ function Delete_Post() {
     {       
             try {
                 try {
-                    await axios.delete(`http://localhost:3000/comentarios/post/${inputId}`);
+                    await axios.delete(`http://localhost:3000/comentarios/post/${inputId}`, { headers });
                     }
                     catch (error){
                         console.error("No hay comentarios que eliminar o error en la eliminación de comentarios", error);
                     }
 
-                const response = await axios.delete('http://localhost:3000/posts/'+inputId); 
+                const response = await axios.delete('http://localhost:3000/posts/'+inputId, { headers }); 
                 setMsg("Eliminado correctamente");
                 setInputIdUser("");
                 setInputTitulo("");

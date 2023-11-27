@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './User.css';
 import perfil from "./assets/perfil.png";
+import { AuthContext } from './auth/AuthContext';
 
 export default function User() {
   const [users, setUsers] = useState([]);
   const [followerUserId, setFollowerUserId] = useState(1); // Cambiar según la sesión!!
   const [userMessages, setUserMessages] = useState({}); // Almacena mensajes sgn cada usuario
+  const { token } = useContext(AuthContext);
+  const headers = {
+    'Authorization': `Bearer ${token}`
+}
 
   useEffect(() => {
-    axios.get('http://localhost:3000/users')
+    axios.get('http://localhost:3000/users', { headers })
       .then((response) => {
         setUsers(response.data);
       })
@@ -22,7 +27,7 @@ export default function User() {
   // manejo errores como loco, desordenado hasta q funciono
   const handleFollow = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:3000/followers/user/${userId}/follower/${followerUserId}`);
+      const response = await axios.get(`http://localhost:3000/followers/user/${userId}/follower/${followerUserId}`, { headers });
   
       if (response.status === 200) {
         setUserMessages({ ...userMessages, [userId]: 'Ya sigues a este usuario' });
@@ -30,7 +35,7 @@ export default function User() {
         await axios.post('http://localhost:3000/followers', {
           id_user: userId,
           follower_user_id: followerUserId,
-        });
+        }, { headers });
         setUserMessages({ ...userMessages, [userId]: 'Siguiendo a este usuario' });
       }
     } catch (error) {
@@ -38,7 +43,7 @@ export default function User() {
         await axios.post('http://localhost:3000/followers', {
           id_user: userId,
           follower_user_id: followerUserId,
-        });
+        }, { headers });
         setUserMessages({ ...userMessages, [userId]: 'Ahora sigues a este usuario' });
       } else {
         console.error('Error al seguir al usuario:', error);
@@ -50,12 +55,12 @@ export default function User() {
 
   const handleUnfollow = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:3000/followers/user/${userId}/follower/${followerUserId}`);
+      const response = await axios.get(`http://localhost:3000/followers/user/${userId}/follower/${followerUserId}`, { headers });
   
       console.log('Unfollow Response:', response);
   
       if (response.status === 200) {
-        await axios.delete(`http://localhost:3000/followers/${response.data[0].id}`);
+        await axios.delete(`http://localhost:3000/followers/${response.data[0].id}`, { headers });
         setUserMessages({ ...userMessages, [userId]: 'Dejaste de seguir al usuario' });
       } else if (response.status === 404) {
         setUserMessages({ ...userMessages, [userId]: 'No sigues a este usuario' });
@@ -65,15 +70,28 @@ export default function User() {
       setUserMessages({ ...userMessages, [userId]: 'No sigues a este usuario' });
     }
   };
-  
+
+  const getUserData = () => {
+      var user = JSON.parse(localStorage.getItem("userData"));;
+      console.log(user);
+      if (user == null || user == "null") {
+        user = {
+          name: "Sin iniciar sesión",
+          descripcion: "Descripción",
+        }
+      }
+      return user;
+  }
+
+  const user = getUserData();
 
   return (
     <div>
       <div className="user-profile">
         <img src={perfil} className='user-img' alt='Perfil' />
 
-        <h2 className="user-name">Nombre de Usuario</h2>
-        <p className="user-bio">Descripción breve del usuario.</p>
+        <h2 className="user-name">{user.name}</h2>
+        <p className="user-bio">{user.descripcion}</p>
         <div className="user-stats">
           <div className="stat">
             <strong>Seguidores:</strong> 100

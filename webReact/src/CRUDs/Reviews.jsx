@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../auth/AuthContext';
 
 function Reviews() {
   const { userId } = useParams();
@@ -11,9 +12,13 @@ function Reviews() {
   const [nuevoReview, setNuevoReview] = useState('');
   const [nuevaCalificacion, setNuevaCalificacion] = useState(0);
   const [msg, setMsg] = useState('');
+  const { token } = useContext(AuthContext);
+  const headers = {
+    'Authorization': `Bearer ${token}`
+  }
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/reviews/user/${userId}`)
+    axios.get(`http://localhost:3000/reviews/user/${userId}`, { headers })
       .then(response => {
         setReviews(response.data);
       })
@@ -24,7 +29,7 @@ function Reviews() {
 
   const handleEliminarReview = async (reviewId) => {
     try {
-      await axios.delete(`http://localhost:3000/reviews/${reviewId}`);
+      await axios.delete(`http://localhost:3000/reviews/${reviewId}`, { headers });
 
       const nuevosReviews = reviews.filter(
         (review) => review.id !== reviewId
@@ -48,7 +53,7 @@ function Reviews() {
         id_user_autor: UserIdAutor,
         descripcion: nuevoReview,
         calificacion: nuevaCalificacion,
-      });
+      }, { headers });
 
       setReviews([...reviews, response.data]);
       setNuevoReview('');

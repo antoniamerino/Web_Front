@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams} from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../auth/AuthContext';
 
 function Create_Comentario() {
 
@@ -8,9 +9,13 @@ function Create_Comentario() {
 
     const [comentarios, setComentarios] = useState([]);
     const [nuevoComentario, setNuevoComentario] = useState('');
+    const { token } = useContext(AuthContext);
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    }
   
     useEffect(() => {
-      axios.get(`http://localhost:3000/comentarios/post/${postId}`)
+      axios.get(`http://localhost:3000/comentarios/post/${postId}`, { headers })
         .then(response => {
           setComentarios(response.data);
         })
@@ -22,7 +27,7 @@ function Create_Comentario() {
     const handleEliminarComentario = async (comentarioId) => {
       try {
         // Realiza la llamada a la API para eliminar el comentario
-        await axios.delete(`http://localhost:3000/comentarios/${comentarioId}`);
+        await axios.delete(`http://localhost:3000/comentarios/${comentarioId}`, { headers });
   
         // Actualiza la lista de comentarios después de la eliminación
         const nuevosComentarios = comentarios.filter(
@@ -41,7 +46,7 @@ function Create_Comentario() {
         const response = await axios.post('http://localhost:3000/comentarios', {
           id_post: postId,
           contenido: nuevoComentario,
-        });
+        }, { headers });
   
         // Actualiza la lista de comentarios después de la creación
         setComentarios([...comentarios, response.data]);
