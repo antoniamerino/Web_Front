@@ -77,6 +77,9 @@
   }
   
   /* Añade otros estilos personalizados aquí */
+  .red {
+    background-color: red;
+  }
   
   /* Estilos para alternar colores de filas */
   .user-list li:nth-child(odd) {

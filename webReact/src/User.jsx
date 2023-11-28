@@ -71,6 +71,23 @@ export default function User() {
     }
   };
 
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/users/${userId}`, { headers });
+
+      console.log('Delete Response:', response);
+
+      if (response.status === 200) {
+        setUserMessages({ ...userMessages, [userId]: 'Usuario eliminado' });
+      } else if (response.status === 404) {
+        setUserMessages({ ...userMessages, [userId]: 'No se encontró el usuario' });
+      }
+    } catch (error) {
+      console.error('Error al eliminar al usuario:', error);
+      setUserMessages({ ...userMessages, [userId]: 'Error al eliminar al usuario' });
+    }
+  };
+
   const getUserData = () => {
       var user = JSON.parse(localStorage.getItem("userData"));;
       console.log(user);
@@ -84,6 +101,16 @@ export default function User() {
   }
 
   const user = getUserData();
+
+  function showDeleteButton(userId) {
+    if (user.tipo == "admin") {
+      return (
+        <button class="red" onClick={() => handleDeleteUser(userId)}>
+          Eliminar Usuario
+        </button>
+      )
+    }
+  }
 
   return (
     <div>
@@ -118,6 +145,9 @@ export default function User() {
               <strong>Fecha de Creación:</strong> {user.createdAt}<br />
               <strong>Fecha de Actualización:</strong> {user.updatedAt}<br />
               <br />
+
+              {/* Botón para eliminar */}
+              {showDeleteButton(user.id)}
 
               <Link to={`/feed/reviews/${user.id}`} style={{ textDecoration: 'none' }}>
                 <button>
