@@ -13,6 +13,7 @@ function Login() {
     //Dos estados
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [userMessage, setUserMessage] = useState(""); // Almacena mensajes sgn cada usuario
 
     async function getUserData(email) {
         axios.get(`http://localhost:3000/users/email/${email}`, {
@@ -41,11 +42,14 @@ function Login() {
           const access_token = response.data.access_token;
           setToken(access_token);
           getUserData(email);
-          // location.href = "/";
+          location.href = "/";
 
           console.log(response);
         }).catch((error) => {
           console.log(error);
+          if (error.response.status === 400) {
+            setUserMessage('Credenciales inválidas');
+        }
         })
     };
 
@@ -54,6 +58,7 @@ function Login() {
       <img src={logo} className='logo' alt='Logo' />
 
       <div className="login-form">
+      {userMessage && <h2 className="errormsj">{userMessage}</h2>}
         <h2>Iniciar Sesión</h2>
         <form onSubmit={handleSubmit}>
             <label>
