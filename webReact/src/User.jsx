@@ -7,22 +7,25 @@ import { AuthContext } from './auth/AuthContext';
 
 export default function User() {
   const [users, setUsers] = useState([]);
-  const [followerUserId, setFollowerUserId] = useState(1); // Cambiar según la sesión!!
+  const [followerUserId, setFollowerUserId] = useState(null); // Cambiar según la sesión!!
   const [userMessages, setUserMessages] = useState({}); // Almacena mensajes sgn cada usuario
   const { token } = useContext(AuthContext);
   const headers = {
     'Authorization': `Bearer ${token}`
 }
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/users', { headers })
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [setFollowerUserId]);
+useEffect(() => {
+  axios.get('http://localhost:3000/users', { headers })
+    .then((response) => {
+      setUsers(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  const user = getUserData();
+  setFollowerUserId(user.id);
+
+}, []); 
 
   // manejo errores como loco, desordenado hasta q funciono
   const handleFollow = async (userId) => {
@@ -71,19 +74,46 @@ export default function User() {
     }
   };
 
-  const getUserData = () => {
-      var user = JSON.parse(localStorage.getItem("userData"));;
-      console.log(user);
-      if (user == null || user == "null") {
-        user = {
-          name: "Sin iniciar sesión",
-          descripcion: "Descripción",
-        }
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/users/${userId}`, { headers });
+
+      console.log('Delete Response:', response);
+
+      if (response.status === 200) {
+        setUserMessages({ ...userMessages, [userId]: 'Usuario eliminado' });
+      } else if (response.status === 404) {
+        setUserMessages({ ...userMessages, [userId]: 'No se encontró el usuario' });
       }
-      return user;
+    } catch (error) {
+      console.error('Error al eliminar al usuario:', error);
+      setUserMessages({ ...userMessages, [userId]: 'Error al eliminar al usuario' });
+    }
+  };
+
+  const getUserData = () => {
+    var user = JSON.parse(localStorage.getItem("userData"));;
+    console.log(user);
+    if (user == null || user == "null") {
+      user = {
+        name: "Sin iniciar sesión",
+        descripcion: "Descripción",
+      }
+    }
+    return user;
   }
 
   const user = getUserData();
+
+  function showDeleteButton(userId) {
+    if (user.tipo == "admin") {
+      return (
+        <button class="red" onClick={() => handleDeleteUser(userId)}>
+          Eliminar Usuario
+        </button>
+      )
+    }
+  }
 
   return (
     <div>
@@ -92,14 +122,7 @@ export default function User() {
 
         <h2 className="user-name">{user.name}</h2>
         <p className="user-bio">{user.descripcion}</p>
-        <div className="user-stats">
-          <div className="stat">
-            <strong>Seguidores:</strong> 100
-          </div>
-          <div className="stat">
-            <strong>Siguiendo:</strong> 50
-          </div>
-        </div>
+        <p className="user-money"><strong>Monedero:</strong> {user.monedero}</p>
       </div>
 
       <div className="user-list">
@@ -118,6 +141,9 @@ export default function User() {
               <strong>Fecha de Creación:</strong> {user.createdAt}<br />
               <strong>Fecha de Actualización:</strong> {user.updatedAt}<br />
               <br />
+
+              {/* Botón para eliminar */}
+              {showDeleteButton(user.id)}
 
               <Link to={`/feed/reviews/${user.id}`} style={{ textDecoration: 'none' }}>
                 <button>

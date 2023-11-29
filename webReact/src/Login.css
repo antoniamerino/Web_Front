@@ -23,7 +23,8 @@
   
   /* Estilos específicos para el campo de correo electrónico */
   input[type="email"],
-  input[type="password"] {
+  input[type="password"],
+  input[type="text"] {
     text-align: left;
     width: calc(100% - 24px); /* Ajusta el ancho para compensar el padding */
   }

@@ -7,6 +7,7 @@ import Instructions from '../Instructions';
 import User from '../User';
 
 import Login from '../Login.jsx';
+import Register from '../Register.jsx';
 import UserCheck from '../protected/UserCheck.jsx';
 import AdminCheck from '../protected/AdminCheck.jsx';
 
@@ -28,6 +29,7 @@ function Routing() {
                 <Route path= {"/user"} element={<User />} />
 
                 <Route path= {"/login"} element={<Login />} />
+                <Route path= {"/register"} element={<Register />} />
                 <Route path= {"/protecteduser"} element={<UserCheck />} />
                 <Route path= {"/protectedadmin"} element={<AdminCheck />} />
 

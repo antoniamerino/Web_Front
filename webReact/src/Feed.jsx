@@ -18,12 +18,25 @@ function Feed() {
     // ]
 
     const [posts, setPosts] = useState([]);
+    const [msg, setMsg] = useState("");
     const { token } = useContext(AuthContext);
     const headers = {
         'Authorization': `Bearer ${token}`
     }
 
+    const getUserData = () => {
+        var user = JSON.parse(localStorage.getItem("userData"));;
+        console.log(user);
+        if (user == null || user == "null")
+        {
+            setMsg("Debes iniciar sesion para ver las ofertas")
+        }
+
+        return user;
+      }
+
     useEffect(() => {
+        const user = getUserData();
       axios.get('http://localhost:3000/posts', { headers })
         .then((response) => {
           setPosts(response.data);

@@ -23,14 +23,27 @@ function Create_Post() {
         'Authorization': `Bearer ${token}`
     }
 
+    const getUserData = () => {
+        var user = JSON.parse(localStorage.getItem("userData"));;
+        console.log(user);
+        return user;
+      }
+    const user = getUserData();
+
+
+
   const handleCreatePost = async (event) => {
     event.preventDefault();
+    setInputIdUser(user.id)
+    const myUserIdValue = user.id;
+    setInputIdUser(myUserIdValue);
 
-    if (inputIdUser !== "" && inputTitulo !== "" && inputDescripcion !== "" && inputCategoria !== "" && inputPrecio !== "" && inputCreatedAt !== "" && inputUpdatedAt !== "" && inputFoto !== "")
+
+    if (inputIdUser !== "" && inputTitulo !== "" && inputDescripcion !== "" && inputCategoria !== "" && inputPrecio !== "" && inputCreatedAt !== "" && inputUpdatedAt !== "")
     {       
             try {
                 const nuevo_post = {
-                  iduser: parseInt(inputIdUser, 10),
+                    id_user: myUserIdValue,
                     titulo: inputTitulo,
                     foto: inputFoto,
                     descripcion: inputDescripcion,
@@ -67,19 +80,6 @@ return (
           <h1>Crear Post</h1>
           {msg && <h2 className="errormsj">{msg}</h2>}
           <div className="form-group">
-              <label htmlFor="iduser">Id User</label>
-              <input
-                  className="form-control"
-                  type="iduser"
-                  id="iduser"
-                  name="iduser"
-                  value={inputIdUser}
-                  onChange={(event) => setInputIdUser(event.target.value)}
-                  required
-              />
-
-          </div>
-          <div className="form-group">
               <label htmlFor="titulo">Titulo</label>
               <input
                   className="form-control"
@@ -88,18 +88,6 @@ return (
                   name="titulo"
                   value={inputTitulo}
                   onChange={(event) => setInputTitulo(event.target.value)}
-                  required
-              />
-          </div>
-          <div className="form-group">
-              <label htmlFor="foto">Foto</label>
-              <input
-                  className="form-control"
-                  type="foto"
-                  id="foto"
-                  name="foto"
-                  value={inputFoto}
-                  onChange={(event) => setInputFoto(event.target.value)}
                   required
               />
           </div>
