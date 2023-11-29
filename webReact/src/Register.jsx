@@ -31,7 +31,7 @@ function Register() {
             email: email,
             password: password,
             tipo: "usuario",
-            foto: foto,
+            foto: null,
             descripcion: descripcion,
             calificacion: 0,
             monedero: 20000
@@ -98,7 +98,7 @@ function Register() {
                     required
                 />
             </label>
-            <label>
+            {/* <label>
                 Foto:
                 <input 
                     type="text"
@@ -106,7 +106,7 @@ function Register() {
                     value={foto}
                     onChange={e => setFoto(e.target.value)}
                 />
-            </label>
+            </label> */}
             <label>
                 Descripción:
                 <input 
