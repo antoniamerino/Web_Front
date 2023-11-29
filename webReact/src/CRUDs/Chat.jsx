@@ -1,3 +1,6 @@
+// Chat.jsx
+// ChatGPT adapto este codigo al .CSS (para que calcen los nombres de las clases)
+
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -6,7 +9,7 @@ import { AuthContext } from '../auth/AuthContext';
 
 function Chat() {
   const { userId } = useParams();
-  const [myUserId, setMyUserId] = useState(1); // Cambiar según la sesión!!
+  const [myUserId, setMyUserId] = useState(); 
   const [chatData, setChatData] = useState({});
   const [mensajes, setMensajes] = useState([]);
   const [newMensaje, setNewMensaje] = useState('');
@@ -16,40 +19,60 @@ function Chat() {
     'Authorization': `Bearer ${token}`
   }
 
+  const getUserData = () => {
+    var user = JSON.parse(localStorage.getItem("userData"));
+    console.log(user);
+    return user;
+  }
+
   useEffect(() => {
     const fetchChatData = async () => {
       try {
-        const chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${myUserId}/user2/${userId}`, { headers });
-        const chat = chatRespuesta.data[0];
-        setChatData(chat);
+        const user = getUserData();
+        setMyUserId(user.id);
+        const myUserIdValue = user.id;
 
-    // LO CREAMOS SI NO EXISTE
-        if (!chat) {
-            try {
-                const newChatRespuesta = await axios.post('http://localhost:3000/chats', { id_user_1: myUserId, id_user_2: userId }, { headers });
-                const newChat = newChatRespuesta.data;
-                console.log('Respuesta del servidor al crear el chat:', newChat);
-              
-                setChatData(newChat);
-                setMensajes([]);
-              } catch (error) {
-                console.error('Error al crear el chat:', error);
-                setMsg('Error al crear el chat');
-              }
-          setChatData(newChat);
-          setMensajes([]);
+        if (myUserIdValue == userId) {
+          setMsg('No puedes chatear contigo mismo');
+          return;
         } else {
-    // SI YA EXISTE LO CARGAMOS
-    try{
-        const mensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chat.id}`, { headers });
-        const chatMensajes = mensajesRespuesta.data;
-        setMensajes(chatMensajes);
-    }
-    catch (error) {
-        console.error('Error al cargar el chat:', error);
-        setMsg('No hay mensajes en este chat');
-    }
+          let chatRespuesta;
 
+          try {
+            chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${myUserIdValue}/user2/${userId}`, { headers });
+          } catch (error) {
+            try {
+              chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${userId}/user2/${myUserIdValue}`, { headers });
+            } catch (error) {
+              setMsg('error 2');
+            }
+          }
+
+          const chat = chatRespuesta.data[0];
+          setChatData(chat);
+
+          if (!chat) {
+            try {
+              const newChatRespuesta = await axios.post('http://localhost:3000/chats', { id_user_1: myUserIdValue, id_user_2: userId }, { headers });
+              const newChat = newChatRespuesta.data;
+              console.log('Respuesta del servidor al crear el chat:', newChat);
+            
+              setChatData(newChat);
+              setMensajes([]);
+            } catch (error) {
+              console.error('Error al crear el chat:', error);
+              setMsg('Error al crear el chat');
+            }
+          } else {
+            try {
+              const mensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chat.id}`, { headers });
+              const chatMensajes = mensajesRespuesta.data;
+              setMensajes(chatMensajes);
+            } catch (error) {
+              console.error('Error al cargar el chat:', error);
+              setMsg('No hay mensajes en este chat');
+            }
+          }
         }
       } catch (error) {
         console.error(error);
@@ -60,18 +83,14 @@ function Chat() {
     fetchChatData();
   }, [userId, myUserId]);
 
-
   const handleNewMensaje = async (event) => {
     event.preventDefault();
 
     try {
-        // posteamos
       await axios.post('http://localhost:3000/mensajes', { id_chat: chatData.id, id_user_sender: myUserId, contenido: newMensaje }, { headers });
-      // de nuevo recogemos el get
       const updatedMensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chatData.id}`, { headers });
       const updatedMensajes = updatedMensajesRespuesta.data;
 
-      // redefinimo
       setMensajes(updatedMensajes);
       setNewMensaje('');
     } catch (error) {

@@ -24,6 +24,13 @@ function Delete_Post() {
     'Authorization': `Bearer ${token}`
   }
 
+  const getUserData = () => {
+    var user = JSON.parse(localStorage.getItem("userData"));;
+    console.log(user);
+    return user;
+  }
+const user = getUserData();
+
   const handleClickGet = async (event) => {
     if (inputId === "") {
         setMsg("Debes ingresar un id");
@@ -51,11 +58,18 @@ function Delete_Post() {
   const handleClickDelete = async (event) => {
     event.preventDefault();
 
-    if (inputIdUser !== "" && inputTitulo !== "" && inputDescripcion !== "" && inputCategoria !== "" && inputPrecio !== "" && inputCreatedAt !== "" && inputUpdatedAt !== "" && inputFoto !== "")
+    const myUserIdValue = user.id;
+    setInputIdUser(myUserIdValue);
+
+    if (!(inputIdUser !== myUserIdValue)) {
+
+    if (inputTitulo !== "" && inputDescripcion !== "" && inputCategoria !== "" && inputPrecio !== "" && inputCreatedAt !== "" && inputUpdatedAt !== "")
     {       
             try {
                 try {
-                    await axios.delete(`http://localhost:3000/comentarios/post/${inputId}`, { headers });
+                        if (inputIdUser == myUserIdValue){
+                          await axios.delete(`http://localhost:3000/comentarios/post/${inputId}`, { headers });
+                        }
                     }
                     catch (error){
                         console.error("No hay comentarios que eliminar o error en la eliminación de comentarios", error);
@@ -84,6 +98,11 @@ function Delete_Post() {
         setMsg("Debes completar todos los inputs");
         setComplete(false);
 
+    }
+
+    }
+    else{
+        setMsg("No puedes eliminar un post que no es tuyo");
     }
 }
 return (

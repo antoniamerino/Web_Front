@@ -1,0 +1,31 @@
+/* Reviews.css obtenido de ChatGTP*/
+
+.container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .new-review {
+    margin-bottom: 20px;
+  }
+  
+  .review-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .review-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .review-details {
+    margin-bottom: 5px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
