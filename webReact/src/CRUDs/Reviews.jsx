@@ -2,11 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../auth/AuthContext';
+import './Review.css';
 
 function Reviews() {
   const { userId } = useParams();
 
-  const [UserIdAutor, setUserIdAutor] = useState(1); // Cambiar según la sesión!!
+  const [UserIdAutor, setUserIdAutor] = useState(); 
 
   const [reviews, setReviews] = useState([]);
   const [nuevoReview, setNuevoReview] = useState('');
@@ -25,7 +26,9 @@ function Reviews() {
       .catch(error => {
         console.error(error);
       });
-  }, [userId]);
+      setUserIdAutor(userId);
+  }, []);
+  
 
   const handleEliminarReview = async (reviewId) => {
     try {
