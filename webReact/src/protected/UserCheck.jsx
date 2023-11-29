@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../auth/AuthContext";
+import API_URL from "../config";
 
 function UserCheck(route) {
     const { token } = useContext(AuthContext);
@@ -8,7 +9,7 @@ function UserCheck(route) {
 
     const config = {
         'method': 'get',
-        'url': `http://localhost:3000/${route}`,
+        'url': `${API_URL}/${route}`,
         'headers': {
             'Authorization': `Bearer ${token}`
         }

@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from "./auth/AuthContext";
 import { useContext } from "react";
 import { json } from "react-router-dom";
+import API_URL from './config';
 
 //Componente
 function Register() {
@@ -24,7 +25,7 @@ function Register() {
 
         console.log("apretaste el form")
         // vamos a enviar un post
-        axios.post("http://localhost:3000/signup",
+        axios.post(`${API_URL}/signup`,
         {
             name: name,
             username: username,

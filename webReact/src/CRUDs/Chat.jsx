@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Chat.css';
 import { AuthContext } from '../auth/AuthContext';
+import API_URL from '../config';
 
 function Chat() {
   const { userId } = useParams();
@@ -40,11 +41,11 @@ function Chat() {
           let hay_chat = false;
 
           try {
-            chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${myUserIdValue}/user2/${userId}`, { headers });
+            chatRespuesta = await axios.get(`${API_URL}/chats/user1/${myUserIdValue}/user2/${userId}`, { headers });
             hay_chat = true;
           } catch (error) {
             try {
-              chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${userId}/user2/${myUserIdValue}`, { headers });
+              chatRespuesta = await axios.get(`${API_URL}/chats/user1/${userId}/user2/${myUserIdValue}`, { headers });
               hay_chat = true;
             } catch (error) {
               hay_chat = false;
@@ -52,7 +53,7 @@ function Chat() {
 
               if (hay_chat == false) {
                 try {
-                  const newChatRespuesta = await axios.post('http://localhost:3000/chats', { id_user_1: myUserIdValue, id_user_2: userId }, { headers });
+                  const newChatRespuesta = await axios.post(`${API_URL}/chats`, { id_user_1: myUserIdValue, id_user_2: userId }, { headers });
                   const newChat = newChatRespuesta.data;
                   console.log('Respuesta del servidor al crear el chat:', newChat);
                 
@@ -64,7 +65,7 @@ function Chat() {
                 }
               } else {
                 try {
-                  const mensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chat.id}`, { headers });
+                  const mensajesRespuesta = await axios.get(`${API_URL}/mensajes/chat/${chat.id}`, { headers });
                   const chatMensajes = mensajesRespuesta.data;
                   setMensajes(chatMensajes);
                 } catch (error) {
@@ -94,8 +95,8 @@ function Chat() {
     event.preventDefault();
 
     try {
-      await axios.post('http://localhost:3000/mensajes', { id_chat: chatData.id, id_user_sender: myUserId, contenido: newMensaje }, { headers });
-      const updatedMensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chatData.id}`, { headers });
+      await axios.post(`${API_URL}/mensajes`, { id_chat: chatData.id, id_user_sender: myUserId, contenido: newMensaje }, { headers });
+      const updatedMensajesRespuesta = await axios.get(`${API_URL}/mensajes/chat/${chatData.id}`, { headers });
       const updatedMensajes = updatedMensajesRespuesta.data;
 
       setMensajes(updatedMensajes);

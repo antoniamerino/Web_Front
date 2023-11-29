@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState , useEffect, useContext } from 'react';
 import { AuthContext } from './auth/AuthContext';
+import API_URL from './config';
 
 function Feed() {
     // const posts = [
@@ -37,7 +38,7 @@ function Feed() {
 
     useEffect(() => {
         const user = getUserData();
-      axios.get('http://localhost:3000/posts', { headers })
+        axios.get(`${API_URL}/posts`, { headers })
         .then((response) => {
           setPosts(response.data);
         })

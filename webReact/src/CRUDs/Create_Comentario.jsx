@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams} from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../auth/AuthContext';
+import API_URL from '../config';
 
 function Create_Comentario() {
 
@@ -15,7 +16,7 @@ function Create_Comentario() {
     }
   
     useEffect(() => {
-      axios.get(`http://localhost:3000/comentarios/post/${postId}`, { headers })
+      axios.get(`${API_URL}/comentarios/post/${postId}`, { headers })
         .then(response => {
           setComentarios(response.data);
         })
@@ -27,7 +28,7 @@ function Create_Comentario() {
     const handleEliminarComentario = async (comentarioId) => {
       try {
         // Realiza la llamada a la API para eliminar el comentario
-        await axios.delete(`http://localhost:3000/comentarios/${comentarioId}`, { headers });
+        await axios.delete(`${API_URL}/comentarios/${comentarioId}`, { headers });
   
         // Actualiza la lista de comentarios después de la eliminación
         const nuevosComentarios = comentarios.filter(
@@ -43,7 +44,7 @@ function Create_Comentario() {
     const handleCrearComentario = async () => {
       try {
         // Realiza la llamada a la API para crear un nuevo comentario
-        const response = await axios.post('http://localhost:3000/comentarios', {
+        const response = await axios.post(`${API_URL}/comentarios`, {
           id_post: postId,
           contenido: nuevoComentario,
         }, { headers });

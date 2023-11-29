@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../auth/AuthContext';
 import './Review.css';
+import API_URL from '../config';
 
 function Reviews() {
   const { userId } = useParams();
@@ -19,7 +20,7 @@ function Reviews() {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/reviews/user/${userId}`, { headers })
+    axios.get(`${API_URL}/reviews/user/${userId}`, { headers })
       .then(response => {
         setReviews(response.data);
       })
@@ -32,7 +33,7 @@ function Reviews() {
 
   const handleEliminarReview = async (reviewId) => {
     try {
-      await axios.delete(`http://localhost:3000/reviews/${reviewId}`, { headers });
+      await axios.delete(`${API_URL}/reviews/${reviewId}`, { headers });
 
       const nuevosReviews = reviews.filter(
         (review) => review.id !== reviewId
@@ -51,7 +52,7 @@ function Reviews() {
             console.error('La calificación debe estar entre 0 y 5.');
             return;
           }
-      const response = await axios.post('http://localhost:3000/reviews', {
+      const response = await axios.post(`${API_URL}/reviews`, {
         id_user: userId,
         id_user_autor: UserIdAutor,
         descripcion: nuevoReview,

@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from "./auth/AuthContext";
 import { useContext } from "react";
 import { json } from "react-router-dom";
+import API_URL from './config';
 
 //Componente
 function Login() {
@@ -16,7 +17,7 @@ function Login() {
     const [userMessage, setUserMessage] = useState(""); // Almacena mensajes sgn cada usuario
 
     async function getUserData(email) {
-        axios.get(`http://localhost:3000/users/email/${email}`, {
+        axios.get(`${API_URL}/users/email/${email}`, {
         }).then((response) => {
             localStorage.setItem("userData", JSON.stringify(response.data));
             const userData = JSON.parse(localStorage.getItem("userData"));
@@ -33,7 +34,7 @@ function Login() {
 
         console.log("apretaste el form")
         // vamos a enviar un post
-        axios.post("http://localhost:3000/login",
+        axios.post(`${API_URL}/login`,
         {
             email: email,
             password: password

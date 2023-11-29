@@ -4,6 +4,7 @@ import React, { useState, useContext } from 'react';
 import './Post.css';
 import axios from 'axios';
 import { AuthContext } from '../auth/AuthContext';
+import API_URL from '../config';
 
 function Delete_Post() {
 
@@ -38,7 +39,7 @@ const user = getUserData();
     }
 
     try {
-        const response = await axios.get('http://localhost:3000/posts/'+inputId, { headers }); 
+        const response = await axios.get(`${API_URL}/posts/${inputId}`, { headers }); 
         setInputIdUser(response.data.id_user);
         setInputTitulo(response.data.titulo);
         setInputFoto(response.data.foto);
@@ -68,14 +69,14 @@ const user = getUserData();
             try {
                 try {
                         if (inputIdUser == myUserIdValue){
-                          await axios.delete(`http://localhost:3000/comentarios/post/${inputId}`, { headers });
+                          await axios.delete(`${API_URL}/comentarios/post/${inputId}`, { headers });
                         }
                     }
                     catch (error){
                         console.error("No hay comentarios que eliminar o error en la eliminación de comentarios", error);
                     }
 
-                const response = await axios.delete('http://localhost:3000/posts/'+inputId, { headers }); 
+                const response = await axios.delete(`${API_URL}/posts/${inputId}`, { headers }); 
                 setMsg("Eliminado correctamente");
                 setInputIdUser("");
                 setInputTitulo("");

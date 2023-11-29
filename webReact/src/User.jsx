@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './User.css';
 import perfil from "./assets/perfil.png";
 import { AuthContext } from './auth/AuthContext';
+import API_URL from './config';
 
 export default function User() {
   const [users, setUsers] = useState([]);
@@ -15,7 +16,7 @@ export default function User() {
 }
 
 useEffect(() => {
-  axios.get('http://localhost:3000/users', { headers })
+  axios.get(`${API_URL}/users`, { headers })
     .then((response) => {
       setUsers(response.data);
     })
@@ -30,12 +31,12 @@ useEffect(() => {
   // manejo errores como loco, desordenado hasta q funciono
   const handleFollow = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:3000/followers/user/${userId}/follower/${followerUserId}`, { headers });
+      const response = await axios.get(`${API_URL}/followers/user/${userId}/follower/${followerUserId}`, { headers });
   
       if (response.status === 200) {
         setUserMessages({ ...userMessages, [userId]: 'Ya sigues a este usuario' });
       } else if (response.status === 404) {
-        await axios.post('http://localhost:3000/followers', {
+        await axios.post(`${API_URL}/followers`, {
           id_user: userId,
           follower_user_id: followerUserId,
         }, { headers });
@@ -43,7 +44,7 @@ useEffect(() => {
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
-        await axios.post('http://localhost:3000/followers', {
+        await axios.post(`${API_URL}/followers`, {
           id_user: userId,
           follower_user_id: followerUserId,
         }, { headers });
@@ -58,12 +59,12 @@ useEffect(() => {
 
   const handleUnfollow = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:3000/followers/user/${userId}/follower/${followerUserId}`, { headers });
+      const response = await axios.get(`${API_URL}/followers/user/${userId}/follower/${followerUserId}`, { headers });
   
       console.log('Unfollow Response:', response);
   
       if (response.status === 200) {
-        await axios.delete(`http://localhost:3000/followers/${response.data[0].id}`, { headers });
+        await axios.delete(`${API_URL}/followers/${response.data[0].id}`, { headers });
         setUserMessages({ ...userMessages, [userId]: 'Dejaste de seguir al usuario' });
       } else if (response.status === 404) {
         setUserMessages({ ...userMessages, [userId]: 'No sigues a este usuario' });
@@ -76,7 +77,7 @@ useEffect(() => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/users/${userId}`, { headers });
+      const response = await axios.delete(`${API_URL}/users/${userId}`, { headers });
 
       console.log('Delete Response:', response);
 

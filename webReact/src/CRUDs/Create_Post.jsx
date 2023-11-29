@@ -4,6 +4,7 @@ import React, { useState, useContext } from 'react';
 import './Post.css';
 import axios from 'axios';
 import { AuthContext } from '../auth/AuthContext';
+import API_URL from '../config';
 
 function Create_Post() {
 
@@ -53,7 +54,7 @@ function Create_Post() {
                     updatedAt: inputUpdatedAt
                   }
 
-                    await axios.post('http://localhost:3000/posts', nuevo_post, { headers });
+                    await axios.post(`${API_URL}/posts`, nuevo_post, { headers });
                     setMsg("Posteado bien");
                     setComplete(true);
             }
