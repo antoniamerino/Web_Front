@@ -37,46 +37,53 @@ function Chat() {
           return;
         } else {
           let chatRespuesta;
+          let hay_chat = false;
 
           try {
             chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${myUserIdValue}/user2/${userId}`, { headers });
+            hay_chat = true;
           } catch (error) {
             try {
               chatRespuesta = await axios.get(`http://localhost:3000/chats/user1/${userId}/user2/${myUserIdValue}`, { headers });
+              hay_chat = true;
             } catch (error) {
-              setMsg('error 2');
+              hay_chat = false;
+              
+
+              if (hay_chat == false) {
+                try {
+                  const newChatRespuesta = await axios.post('http://localhost:3000/chats', { id_user_1: myUserIdValue, id_user_2: userId }, { headers });
+                  const newChat = newChatRespuesta.data;
+                  console.log('Respuesta del servidor al crear el chat:', newChat);
+                
+                  setChatData(newChat);
+                  setMensajes([]);
+                } catch (error) {
+                  console.error('Error al crear el chat:', error);
+                  setMsg('Error al crear el chat');
+                }
+              } else {
+                try {
+                  const mensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chat.id}`, { headers });
+                  const chatMensajes = mensajesRespuesta.data;
+                  setMensajes(chatMensajes);
+                } catch (error) {
+                  console.error('Error al cargar el chat:', error);
+                  setMsg('No hay mensajes en este chat');
+                }
+              }
+
+
+
             }
           }
 
           const chat = chatRespuesta.data[0];
           setChatData(chat);
-
-          if (!chat) {
-            try {
-              const newChatRespuesta = await axios.post('http://localhost:3000/chats', { id_user_1: myUserIdValue, id_user_2: userId }, { headers });
-              const newChat = newChatRespuesta.data;
-              console.log('Respuesta del servidor al crear el chat:', newChat);
-            
-              setChatData(newChat);
-              setMensajes([]);
-            } catch (error) {
-              console.error('Error al crear el chat:', error);
-              setMsg('Error al crear el chat');
-            }
-          } else {
-            try {
-              const mensajesRespuesta = await axios.get(`http://localhost:3000/mensajes/chat/${chat.id}`, { headers });
-              const chatMensajes = mensajesRespuesta.data;
-              setMensajes(chatMensajes);
-            } catch (error) {
-              console.error('Error al cargar el chat:', error);
-              setMsg('No hay mensajes en este chat');
-            }
-          }
         }
       } catch (error) {
         console.error(error);
-        setMsg('Error al cargar el chat');
+        // setMsg('Error al cargar el chat');
       }
     };
 
@@ -102,6 +109,7 @@ function Chat() {
     <div className="chat-container">
       {msg && <h2 className="errormsj">{msg}</h2>}
       <h3>{`ChatID ${chatData.id}: Chat entre ${chatData.id_user_1} y ${chatData.id_user_2}`}</h3>
+      <h5>Envia un mensaje para reiniciar la conversacion</h5>
       <div className="chat-mensajes">
         {mensajes.map((mensaje) => (
           <div key={mensaje.id} className={`mensaje ${mensaje.id_user_sender === myUserId ? 'sent' : 'received'}`}>
