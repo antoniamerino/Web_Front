@@ -9,7 +9,7 @@ function UserCheck(route) {
 
     const config = {
         'method': 'get',
-        'url': `${API_URL}/${route}`,
+        'url': API_URL + '/' + route,
         'headers': {
             'Authorization': `Bearer ${token}`
         }
