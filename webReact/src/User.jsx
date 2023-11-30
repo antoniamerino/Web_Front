@@ -93,7 +93,7 @@ useEffect(() => {
   };
 
   const getUserData = () => {
-    var user = JSON.parse(localStorage.getItem("userData"));;
+    var user = JSON.parse(localStorage.getItem("userData"));
     console.log(user);
     if (user == null || user == "null") {
       user = {
@@ -109,7 +109,7 @@ useEffect(() => {
   function showDeleteButton(userId) {
     if (user.tipo == "admin") {
       return (
-        <button class="red" onClick={() => handleDeleteUser(userId)}>
+        <button className="red" onClick={() => handleDeleteUser(userId)}>
           Eliminar Usuario
         </button>
       )

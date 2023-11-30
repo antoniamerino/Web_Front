@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import './Feed.css'
 // import Post from "./Post"
 import taxi from './assets/taxi.jpg';
@@ -26,7 +27,7 @@ function Feed() {
     }
 
     const getUserData = () => {
-        var user = JSON.parse(localStorage.getItem("userData"));;
+        var user = JSON.parse(localStorage.getItem("userData"));
         console.log(user);
         if (user == null || user == "null")
         {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Create_Post.jsx
 
 import React, { useState, useContext } from 'react';
@@ -25,7 +26,7 @@ function Create_Post() {
     }
 
     const getUserData = () => {
-        var user = JSON.parse(localStorage.getItem("userData"));;
+        var user = JSON.parse(localStorage.getItem("userData"));
         console.log(user);
         return user;
       }
