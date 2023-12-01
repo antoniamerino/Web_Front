@@ -17,42 +17,42 @@ function Login() {
     const [userMessage, setUserMessage] = useState(""); // Almacena mensajes sgn cada usuario
 
     async function getUserData(email) {
-        axios.get(`${API_URL}/users/email/${email}`, {
-        }).then((response) => {
-            localStorage.setItem("userData", JSON.stringify(response.data));
-            const userData = JSON.parse(localStorage.getItem("userData"));
-            console.log(userData);
-            return response.data;
-        }).catch((error) => {
-            console.log(error);
-            return null;
-        })
-    }
+      try {
+          const response = await axios.get(`${API_URL}/users/email/${email}`, {});
+          const userData = response.data;
+          localStorage.setItem("userData", JSON.stringify(userData));
+          return userData;
+      } catch (error) {
+          console.log("Error al obtener datos del usuario:", error);
+          return null;
+      }
+  }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        console.log("apretaste el form")
-        // vamos a enviar un post
-        axios.post(`${API_URL}/login`,
-        {
+    console.log("apretaste el form")
+    try {
+        const response = await axios.post(`${API_URL}/login`, {
             email: email,
             password: password
-        }).then((response) => {
-          // uno entra acá si no hay error en el request
-          const access_token = response.data.access_token;
-          setToken(access_token);
-          getUserData(email);
-          location.href = "/";
+        });
 
-          console.log(response);
-        }).catch((error) => {
-          console.log(error);
-          if (error.response.status === 400) {
+        const access_token = response.data.access_token;
+        setToken(access_token);
+
+        // Llamada para obtener datos del usuario y almacenarlos en localStorage
+        await getUserData(email);
+
+        location.href = "/";
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+        if (error.response.status === 400) {
             setUserMessage('Credenciales inválidas');
         }
-        })
-    };
+    }
+};
 
   return (
     <div className="container">

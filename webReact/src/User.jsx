@@ -93,15 +93,26 @@ useEffect(() => {
   };
 
   const getUserData = () => {
-    var user = JSON.parse(localStorage.getItem("userData"));
-    console.log(user);
-    if (user == null || user == "null") {
-      user = {
+    try {
+      var user = JSON.parse(localStorage.getItem("userData"));
+      console.log("User data retrieved from localStorage:", user);
+      
+      if (user == null || user == "null") {
+        console.log("User is null or 'null', providing default data.");
+        user = {
+          name: "Sin iniciar sesión",
+          descripcion: "Descripción",
+        }
+      }
+
+      return user;
+    } catch (error) {
+      console.error("Error retrieving user data from localStorage:", error);
+      return {
         name: "Sin iniciar sesión",
         descripcion: "Descripción",
-      }
-    }
-    return user;
+      };
+    } 
   }
 
   const user = getUserData();
