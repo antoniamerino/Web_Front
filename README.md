@@ -26,6 +26,60 @@ Ademas se incluyen elementos como iniciar sesion y el registro.
 
 4. Perfil del usuario: Este es el perfil del usuario donde habrán datos personales, publicaciones, seguidores, reseñas, etc.
 
+### Explicación de que endpoints están conectados de front a back
+
+Los endpoints conectados son todos los esenciales para poder utilizar la app.
+
+Por categoría tenemos los siguientes endpoints con las siguientes funciones asociadas:
+
+/posts: get, post
+posts/${inputId}: get, delete
+
+/users/email/${email}: get
+/users: get
+/users/${userId}: delete
+
+/login: post
+
+/signup: post
+
+/followers: post
+/followers/user/${userId}/follower/${followerUserId}: get
+/followers/${response.data[0].id}: delete
+
+/chats: post
+/chats/user1/${myUserIdValue}/user2/${userId}: get
+
+/mensajes: post
+/mensajes/chat/${chat.id}: get
+
+/comentarios: post
+/comentarios/post/${postId}: get
+/comentarios/${comentarioId}: delete
+
+/reviews/user/${userId}: get
+/reviews/${reviewId}: delete
+/reviews: post
+
+
+### Usuarios admin y normal
+
+La aplicación cuenta con dos tipos de usuarios, la única diferencia entre ambos es que el admin cumple un rol de moderador, lo que le permite eliminar a otros usuarios.
+Las credenciales para acceder al admin son:
+email: admin@gmail.com
+password: 1234
+Para usar un usuario normal se puede registrar como nuevo usuario o utilizar al dummy 'Jhon Doe', las credenciales para acceder a este perfil son:
+email: johndoe@gmail.com
+password: 1234
+
+### Flujos de la aplicación
+
+La aplicación funciona con un centro en una página a la que le llamamamos "Home", desde ahí se pueden seleccionar opciones de iniciar sesión o registrarse. Toda la navegación grande funciona desde la NavBar, que permite acceder a los usuarios [User], información de la página [About], al [Home] y al [Feed] donde se ven las publicaciones. Este último está restringido para usuarios y requiere credenciales.
+
+Luego, una vez en la página [User] se despliega una lista de usuarios, los que se pueden seguir o dejar de seguir, además de eliminarlos en caso de ser admin. Al [ver reviews] se llega a una página específica de el usuario seleccionado en la cual se puede publicar una review sobre este o leer reviews que ya tiene.
+
+Por último en el [Feed] se ven las publicaciones, y al apretar en una los [Comentarios] se va a una página específica de comentarios que funciona de manera similar a las [Review] pero en vez de para un usuario está optimizada para un post. También existe la opción de [Contactar al oferente] lo que despliega un chat en el que se pueden intercambiar mensajes.
+
 ### :book: Referencias
 
 Para este proyecto se utilizaron videos de youtube, codigos en internet y chatgpt para resolver dudas y aprender aspectos importantes del lenguaje y su funcionamiento. 
